@@ -29,7 +29,7 @@ function Show({ result }:any) {
   return (
     <div className="relative">
       <Head>
-        <title>{result.title || result.original_name}</title>
+        <title>Disney+ | {result.title || result.original_name}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
