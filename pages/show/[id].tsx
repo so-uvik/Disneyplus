@@ -29,7 +29,7 @@ function Show({ result }:any) {
   return (
     <div className="relative">
       <Head>
-        <title>Disney+ | {result.title || result.original_name}</title>
+        <title>Disney+ | {result.title || result.name}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
@@ -45,11 +45,13 @@ function Show({ result }:any) {
               }
               layout="fill"
               objectFit="cover"
+              className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"
+              // className="absolute inset-0 opacity-100 h-full w-full z-50 bg-gradient-to-tr from-[#808080]"
             />
           </div>
           <div className="absolute inset-y-12 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              {result.title || result.original_name}
+              {result.title || result.name}
             </h1>
             <div className="flex items-center space-x-3 md:space-x-5">
               <button className="text-xs md:text-base bg-[#f9f9f9] text-black flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]">
@@ -58,9 +60,9 @@ function Show({ result }:any) {
                   alt=""
                   className="h-6 md:h-8"
                 />
-                <span className="uppercase font-medium tracking-wide">
+                <a href={`https://www.2embed.to/embed/tmdb/tv?id=${result.id}&s=1&e=1`} target="_blank" className="uppercase font-medium tracking-wide">
                   Play
-                </span>
+                </a>
               </button>
 
               <button
@@ -137,16 +139,17 @@ export async function getServerSideProps(context:any)
 {
     const session = await getSession(context);
     const {id, type }= context.query;
-    const requestMovie = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`
-    ).then((response) => response.json());
+    // const requestMovie = await fetch(
+    //     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`
+    // ).then((response) => response.json());
     const requestShow = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`
     ).then((response) => response.json());
     return {
     props: {
       session,
-      result: type =="movie" ? requestMovie : requestShow, 
+      // result: type =="movie" ? requestMovie : requestShow, 
+      result: requestShow 
     },
   };
 }

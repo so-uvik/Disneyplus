@@ -21,7 +21,7 @@ const Header = () => {
   window.addEventListener('scroll',changeBackground);
   
   return (
-    <Container>
+    <Container scrolled={navbar}>
     {/* <header className="sticky top-0 bg-[#040714] z-20 flex h-[72px] items-center px-10 md:px-12"> */}
          <Image
         src="/images/logo.svg"
@@ -34,12 +34,12 @@ const Header = () => {
         // <Navmenu className="hidden ml-10 md:flex items-center space-x-6">
         <Navmenu>
             {/* <a className="header-link group"> */}
-            <a>
+            <a onClick={()=>router.push("/")}>
                {/* <HomeIcon className="h-4"/> */}
                <img src='/images/home-icon.svg' alt=''/>
                <span className="span">Home</span>
             </a>
-            <a>
+            <a onClick={()=>router.push("/search")}>
             <img src='/images/search-icon.svg' alt=''/>
             {/* <SearchIcon className="h-4" /> */}
             <span className="span">Search</span>

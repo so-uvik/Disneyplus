@@ -8,8 +8,9 @@ const MoviesCollection = (props:any) => {
     <h3 className="font-semibold text-2xl ">{props.title}</h3>
     <Content>
     {props.results.map((result:any) => (
-          result.media_type == "tv" ?
-          <ShowThumbnail key={result.id} result={result}/> : <MovieThumbnail key={result.id} result={result}/>
+          result.backdrop_path &&
+          (result.media_type == "tv" ?
+          <ShowThumbnail key={result.id} result={result}/> : <MovieThumbnail key={result.id} result={result}/>)
         ))}
     </Content>
     </Container>
