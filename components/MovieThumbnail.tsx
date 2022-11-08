@@ -48,3 +48,7 @@ const Wrap= styled.div`
         border-color: rgba(249,249,249,0.8);
     }
 `
+
+
+
+

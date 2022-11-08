@@ -8,10 +8,9 @@ const Search = () => {
 
     const [enteredSearch, setEnteredSearch] = useState('');
     const [movies, setMovies] = useState<Movies[]>([])
-    const API_KEY = '15e383204c1b8a09dbfaaa4c01ed7e17';
-    let flag= 0;
+    
 
-    const emailChangeHandler = (event: any) => {
+    const SearchChangeHandler = (event: any) => {
         console.log(enteredSearch);
         setEnteredSearch(event.target.value);
     };
@@ -20,7 +19,7 @@ const Search = () => {
         const identifier = setTimeout(() => {
           console.log('Running useEffect!');
           if(enteredSearch.trim().length > 0 )
-          fetch(`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&query=${enteredSearch}&include_adult=false`)
+          fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&query=${enteredSearch}&include_adult=false`)
        .then(res => res.json())
        .then(data => {console.log(data)
                    const FilteredData = data.results.filter( (element: Movies) => element.media_type != "person" && element.poster_path !=null)
@@ -47,7 +46,7 @@ const Search = () => {
             </Head>
             <Header />
             <SearchBox>
-                <input type="text" placeholder='Search for movie or a tv-show' onChange={emailChangeHandler} />
+                <input type="text" placeholder='Search for movie or a tv-show' onChange={SearchChangeHandler} />
             </SearchBox>
             {enteredSearch && <h1>Results for: {enteredSearch}</h1>}
            
