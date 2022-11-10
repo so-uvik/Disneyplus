@@ -11,20 +11,16 @@ const Search = () => {
     
 
     const SearchChangeHandler = (event: any) => {
-        console.log(enteredSearch);
         setEnteredSearch(event.target.value);
     };
 
     useEffect(() => {
         const identifier = setTimeout(() => {
-          console.log('Running useEffect!');
           if(enteredSearch.trim().length > 0 )
           fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&query=${enteredSearch}&include_adult=false`)
        .then(res => res.json())
-       .then(data => {console.log(data)
+       .then(data => {
                    const FilteredData = data.results.filter( (element: Movies) => element.media_type != "person" && element.poster_path !=null)
-                   console.log(FilteredData);
-                   
                    setMovies(FilteredData)
        })
           
@@ -32,7 +28,6 @@ const Search = () => {
         if(enteredSearch.trim().length == 0)
         setMovies([]);
         return () => {
-          console.log('CLEANUP');
           clearTimeout(identifier);
         };
       }, [enteredSearch]);
@@ -106,6 +101,9 @@ const SearchBox = styled.div`
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    position: relative;
+    margin-left: 20px;
+    gap: 15px;
     flex-wrap: wrap;
 `

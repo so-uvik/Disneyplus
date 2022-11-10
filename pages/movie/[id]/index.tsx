@@ -5,15 +5,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import Hero from "../../../components/Hero";
-import ReactPlayer from "react-player"
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 const Movie = ({ result}:any) => {
-    const {data: session, status} = useSession()
+    const {data: session} = useSession()
     const [showPlayer, setShowPlayer]= useState(false);
     const BASE_URL = "https://image.tmdb.org/t/p/original/";
     const router = useRouter();
-    console.log(result);
+    const ReactPlayer = dynamic(() => import("react-player/youtube"), { ssr: false });
     
    
       const index = result?.videos && result.videos.results.findIndex(
@@ -53,6 +53,7 @@ const Movie = ({ result}:any) => {
               } 
               layout="fill"
               objectFit="cover"
+              priority={true}
               className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"
             />
             
@@ -98,7 +99,7 @@ const Movie = ({ result}:any) => {
             </div>
             <h4 className="text-sm md:text-lg max-w-4xl">{result.overview}</h4>
             </div>
-            {/* Bg overlay */}
+            
             {showPlayer && (
                 <div className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"></div>
             )}
@@ -111,14 +112,14 @@ const Movie = ({ result}:any) => {
                 onClick={() => setShowPlayer(false)}><XIcon className="h-5 "/></div>
                 </div>
             <div className="relative pt-[56.25%]">
-            <ReactPlayer
+            {<ReactPlayer
                 url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
                 width="100%"
                 height="100%"
                 style={{ position: "absolute", top: "0", left: "0" }}
                 controls={true}
                 playing={showPlayer}
-              />
+              />}
             </div>
             </div>
         </section>

@@ -210,7 +210,12 @@ const Content = styled.div`
     grid-auto-flow: column;
     grid-auto-columns: 15%;
     overflow-x: auto;
-    ` 
+
+    @media only screen and (max-width: 768px) 
+    {
+      grid-auto-columns: 35%;
+    }
+` 
 
 
 export async function getServerSideProps(context:any)

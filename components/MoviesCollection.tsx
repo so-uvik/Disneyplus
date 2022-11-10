@@ -40,5 +40,11 @@ const Content = styled.div`
     grid-auto-flow: column;
     grid-auto-columns: 18.9%;
     overflow-x: auto;
+
+    @media only screen and (max-width: 768px) 
+    {
+      grid-auto-columns: 35%;
+    }
 `
+
 

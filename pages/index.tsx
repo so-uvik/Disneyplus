@@ -7,6 +7,7 @@ import Slider from '../components/Slider'
 import Viewers from '../components/Viewers'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
+import { Movies } from '../models'
 
 const Home: NextPage = ({
   popularMovies,
@@ -15,6 +16,7 @@ const Home: NextPage = ({
   top_ratedShows,
 }:any) => {
   const { data: session } = useSession()
+  
   
   
   
@@ -39,7 +41,8 @@ const Home: NextPage = ({
             results={top_ratedMovies}
             title="Top Rated Movies"
           />
-          <ShowsCollection results={top_ratedShows} title="Top Rated Shows" />
+          
+          <ShowsCollection results={top_ratedShows.filter((show: Movies)=>show.poster_path !=null)} title="Top Rated Shows" />
         </main>
       )}
     </div>

@@ -6,16 +6,15 @@ import { useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import Hero from "../../../components/Hero";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
-import ReactPlayer from "react-player/lazy";
+import dynamic from "next/dynamic";
 
 function Show({ result }:any) {
-  console.log(result);
   
   const {data: session, status} = useSession()
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const router = useRouter();
   const [showPlayer, setShowPlayer] = useState(false);
-
+  const ReactPlayer = dynamic(() => import("react-player/youtube"), { ssr: false });
   useEffect(() => {
     if (!session) {
       router.push("/");
