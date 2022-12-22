@@ -29,7 +29,7 @@ function Show({ result }:any) {
     <div className="relative">
       <Head>
         <title>Disney+ | {result.title || result.name}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <Header />
       {!session ? (
@@ -45,6 +45,7 @@ function Show({ result }:any) {
               layout="fill"
               objectFit="cover"
               className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"
+              priority={true}
               // className="absolute inset-0 opacity-100 h-full w-full z-50 bg-gradient-to-tr from-[#808080]"
             />
           </div>

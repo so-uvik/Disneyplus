@@ -83,9 +83,10 @@ const SearchBox = styled.div`
     
     input 
     {
-        height: 82px;
+        height: 105px;
         width: 100vw;
         background-color: grey;
+        background: linear-gradient( 180deg,rgba(51, 53, 61, 1) 0%,rgba(75, 78, 90, 1) 100%);
         padding-left: 50px;
         outline: none;
 
@@ -93,9 +94,20 @@ const SearchBox = styled.div`
 
     input::placeholder
     {
-        color: white;
-        font-size: 25px;
+        color: #f9f9f9;
+        font-size: 30px;
         font-weight: bold;
+    }
+
+    input:focus
+    {
+        background: linear-gradient(
+        180deg,
+        rgba(51, 53, 61, 1) 0%,
+        rgb(120, 125, 144) 100%
+         );
+        outline: 0;
+        transition: all 0.3s ease-in-out;
     }
 `
 

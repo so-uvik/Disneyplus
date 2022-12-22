@@ -164,7 +164,7 @@ const Carousel = styled(Slider)`
         position: absolute;
         right: 25px;
         text-align: right;
-        pointer-events: none;
+        /* pointer-events: none; */
         width: 100%;
     }
 
