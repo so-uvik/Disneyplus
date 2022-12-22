@@ -7,7 +7,7 @@ import styled from "styled-components";
 import EpisodeDisplay from "../../../components/EpisodeDisplay";
 import { Wrap } from "../../../components/EpisodeDisplay";
 
-const play = ({ result}:any) => {
+const Play = ({ result}:any) => {
   const {data: session, status} = useSession()
   const router = useRouter();
   
@@ -160,7 +160,7 @@ useEffect(() => {
   )
 } 
 
-export default play
+export default Play
 
 const Playing = styled.div`
   

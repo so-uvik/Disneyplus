@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "styled-components";
 
-const play = ({ result}:any) => {
+const Play = ({ result}:any) => {
   const {data: session, status} = useSession()
   const router = useRouter();
   
@@ -58,7 +58,7 @@ const play = ({ result}:any) => {
   )
 } 
 
-export default play
+export default Play
 
 const Playing = styled.div`
   /* margin: 30px 0px;
