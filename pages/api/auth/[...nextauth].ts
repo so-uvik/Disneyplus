@@ -48,6 +48,8 @@ export default NextAuth({
     }),
   ],
 
+  secret: process.env.NEXTAUTH_SECRET,
+
   // adapter: FirestoreAdapter({
   //   db,
   //   collection,
