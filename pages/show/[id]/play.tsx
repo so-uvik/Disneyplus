@@ -138,15 +138,16 @@ useEffect(() => {
             }
         </select>
         <Content>
-        {episodes.map((data:any) => (
+        {episodes.map((data:any,index:number) => (
           
-          <Wrap onClick={() => setEpisode_Number(data.episode_number)}>
+          <Wrap onClick={() => setEpisode_Number(data.episode_number)} key={index}>
       <img
         src={
           `${BASE_URL}${data.still_path}`} 
           // || `${BASE_URL}${episode.poster_path}`
           />
       <h4>{`${data.episode_number}. ${data.name}`}</h4>
+      
     </Wrap>
           // <EpisodeDisplay key={data.id} episode={data} />
         ))}
