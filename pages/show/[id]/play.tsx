@@ -58,7 +58,7 @@ useEffect(() => {
     
     fetch(`https://api.themoviedb.org/3/tv/${result.id}/season/${season_number}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`)
  .then(res => res.json())
- .then(data => {console.log(data)
+ .then(data => {
   setSeason_Number(data.season_number);
              setEpisodes(data.episodes)
              
@@ -74,7 +74,6 @@ useEffect(() => {
   const ChangeHandler = (event:any) =>
   {
     setSeason_Number(event.target.value.substr(6));
-    
   }
 
   /*const playEpisode = () =>
