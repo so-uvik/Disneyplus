@@ -26,13 +26,15 @@ This project is built so as to learn the concepts of NextJS ServerSideRendering(
 - [x] Let users add their favorite shows/movies to watchlist
 - [x] Add a Continue Watching section 
 - [x] Add 'auto-next' functionality on tv-shows
+- [x] Add 'Recommended Movies/Shows' according to the content you're watching on /play page
 
 ## Known Issues
 
 A list of things not working right now:
 
 1. Anime shows not playing as expected (Ex: Demon Slayer, One Piece)
-2. Mobile Navigation
+2. ~Route doesn't always change when hitting play~
+3. Mobile Navigation
 
 ## Running Locally
 

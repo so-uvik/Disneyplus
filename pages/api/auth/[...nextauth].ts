@@ -21,9 +21,9 @@
 
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-//import { FirestoreAdapter } from "@next-auth/firebase-adapter"
-//import { FirebaseAdapter } from "@next-auth/firebase-adapter";
-// import { db } from "../../../firebase"
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+//import { cert } from "firebase-admin/app";
+// import { firestore } from "../../../lib/firestore";
 //    import {
 //      collection,
 //      query,
@@ -40,15 +40,23 @@ import GoogleProvider from "next-auth/providers/google"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export default NextAuth({
+
+/* export default NextAuth ({
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET_ID as string,
     }),
   ],
+   adapter: FirestoreAdapter(),
+}); */
 
-  secret: process.env.NEXTAUTH_SECRET,
+import { authOptions } from "../../../lib/authOptions";
+
+export default NextAuth(authOptions)
+
+
 
   // adapter: FirestoreAdapter({
   //   db,
@@ -94,5 +102,5 @@ export default NextAuth({
 //     return session // The return type will match the one returned in `useSession()`
 //   }
 //   }
-})
+
   // // ...

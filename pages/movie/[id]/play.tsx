@@ -13,12 +13,12 @@ const Play = ({ result}:any) => {
   
   
   
-  useEffect(()=>{
+  /* useEffect(()=>{
     if(!session)
     {
       router.push("/")
     }
-  })
+  }) */
   return (
     <>
     <Head>
@@ -28,9 +28,9 @@ const Play = ({ result}:any) => {
     </Head>
     <Header/>
     <Playing>
-    <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`} width="100%" height="100%" frameBorder="0" allowFullScreen allow="autoplay"></iframe>
+    {<iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`} width="100%" height="100%" frameBorder="0" allowFullScreen allow="autoplay"></iframe>}
     </Playing>
-    <Buttons>
+    {/* <Buttons>
       <span>
       <input type={"checkbox"} id="Autoplay"/>
       <label htmlFor="Autoplay">Autoplay</label>
@@ -53,7 +53,7 @@ const Play = ({ result}:any) => {
       <input type={"checkbox"} id="Add to Watchlist"/>
       <label htmlFor="Add to Watchlist">Add to Watchlist</label>
       </span>
-    </Buttons> 
+    </Buttons>  */}
     </>  
   )
 } 
