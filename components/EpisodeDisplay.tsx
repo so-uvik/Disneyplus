@@ -27,8 +27,8 @@ const Wrap = styled.div`
     border-radius: 10px;
     cursor: pointer;
     margin-bottom: 10px;
-    
     /* overflow: hidden; */
+    aspect-ratio: 16/12;
     
     img
     {

@@ -41,7 +41,7 @@ const Content = styled.div`
 
     @media only screen and (max-width: 768px) 
     {
-      grid-auto-columns: 35%;
+      grid-auto-columns: 40%;
     }
     
 `

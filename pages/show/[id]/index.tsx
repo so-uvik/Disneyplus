@@ -54,13 +54,13 @@ function Show({ result }:any) {
               {result.title || result.name}
             </h1>
             <div className="flex items-center space-x-3 md:space-x-5">
-              <button className="text-xs md:text-base bg-[#f9f9f9] text-black flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]">
+              <button onClick={()=>router.push(`/show/${result.id}/play`)} className="text-xs md:text-base bg-[#f9f9f9] text-black flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]">
                 <img
                   src="/images/play-icon-black.svg"
                   alt=""
                   className="h-6 md:h-8"
                 />
-                <span onClick={()=>router.push(`/show/${result.id}/play`)} className="uppercase font-medium tracking-wide">
+                <span className="uppercase font-medium tracking-wide">
                   Play
                 </span>
               </button>

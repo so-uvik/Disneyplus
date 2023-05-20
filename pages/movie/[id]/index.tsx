@@ -53,6 +53,7 @@ const Movie = ({ result}:any) => {
               } 
               layout="fill"
               objectFit="cover"
+              alt={result.title}
               priority={true}
               className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"
             />
