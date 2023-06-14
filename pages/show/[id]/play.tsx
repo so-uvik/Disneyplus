@@ -4,18 +4,22 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "styled-components";
-import EpisodeDisplay from "../../../components/EpisodeDisplay";
 import { Wrap } from "../../../components/EpisodeDisplay";
+import { Button } from "../../../components/ui/button";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
-const Play = ({ result }: any) => {
+const Play = ({ result, seasonQuery, episodeQuery }: any) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [season_number, setSeason_Number] = useState(1); // stores the current season number
-  const [episode_number, setEpisode_Number] = useState(1); // stores the current episode number to display proper video that is playing
+  const [season_number, setSeason_Number] = useState(seasonQuery); // stores the current season number
+  const [episode_number, setEpisode_Number] = useState(episodeQuery); // stores the current episode number to display proper video that is playing
   const [seasons, setSeasons] = useState<any>([]); // stores how many seasons are there of a show to help display them in dropdown
   const [episodes, setEpisodes] = useState<any>([]); // stores all the episode name of the current season
   const BASE_URL = "https://image.tmdb.org/t/p/w780/";
+  console.log(seasonQuery, episodeQuery);
+  
 
   useEffect(() => {
     fetch(
@@ -64,14 +68,27 @@ const Play = ({ result }: any) => {
         setSeason_Number(data.season_number);
         setEpisodes(data.episodes);
       });
+      router.replace({                                     
+        pathname: `/show/${result.id}/play`,
+        query: {season: season_number, episode: episode_number}, //when user changes season from the dropdown, query string updates respectively.
+        
+      },undefined, { scroll: false }) //scroll:false helps not to scroll page to the top when changing urls.
     // return () => {
     //   console.log('CLEANUP');
     // };
   }, [season_number]); //fetches new season episodes when user changes it.
 
-  const ChangeHandler = (event: any) => {
+  useEffect(()=>{
+    router.replace({
+      pathname: `/show/${result.id}/play`,
+      query: {season: season_number, episode: episode_number},     
+    },undefined, { scroll: false })
+  },[episode_number]) //changes the query string, when user updates the episode. 
+
+  const ChangeSeasonHandler = (event: any) => {
     //setSeason_Number(event.target.value.substr(6));
     setSeason_Number(event.target.value);
+    
   };
 
   useEffect(() => {
@@ -83,12 +100,17 @@ const Play = ({ result }: any) => {
     <>
       <Head>
         <title>{`Disney+ | ${result.title || result.name}`}</title>
-        <meta name="description" content={result.overview} />
+        <meta name="description" content={result.overview} /> 
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <Header />
+      <Header/>
+      <Link href={`/`}>
+      <Button  className="ml-12 mt-5 bg-white text-gray-800 hover:bg-gray-100">
+        <ChevronLeft className="mr-2 h-4 w-4"/>Back
+      </Button>
+      </Link>
       <Playing>
-        <iframe
+        {<iframe
           id="iframe"
           src={`https://www.2embed.to/embed/tmdb/tv?id=${result.id}&s=${season_number}&e=${episode_number}`}
           width="100%"
@@ -97,7 +119,7 @@ const Play = ({ result }: any) => {
           allowFullScreen
           allow="autoplay"
           className="relative mx-auto my-0"
-        ></iframe>
+        ></iframe>}
       </Playing>
 
       {/* <Buttons>
@@ -126,21 +148,23 @@ const Play = ({ result }: any) => {
     </Buttons> */}
       <Container>
         <select
-          value={seasons.name}
-          onChange={ChangeHandler}
+          value={season_number}
+          onChange={ChangeSeasonHandler}
           className="dropdown"
         >
           {seasons.map((season: any) => (
             <option
               value={season.season_number}    //changed this to season.season_number from season.name to solve anime not playing issue.
               key={season.id}
-            >{`Season ${season.season_number}`}</option>
+            >{`${season.name}`}</option>    //previously was `Season ${season.season_number}` inside the {}
           ))}
         </select>
         <Content>
           {episodes.map((data: any, index: number) => (
             <Wrap
-              onClick={() => setEpisode_Number(data.episode_number)}
+              onClick={() => {
+                setEpisode_Number(data.episode_number)
+              }}
               key={index}
             >
               <img
@@ -236,7 +260,8 @@ const Content = styled.div`
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-  const { id, poster_path } = context.query;
+  const { id, poster_path } = context.params;
+  const {season, episode} = context.query;
   const requestShow = await fetch(
     `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`
   ).then((response) => response.json());
@@ -244,6 +269,8 @@ export async function getServerSideProps(context: any) {
     props: {
       session,
       result: requestShow,
+      seasonQuery: season,
+      episodeQuery: episode,
     },
   };
 }

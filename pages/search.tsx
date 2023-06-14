@@ -37,7 +37,7 @@ const Search = () => {
     <Main>
       <Head>
         <title>Disney+</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <Header />
       <SearchBox>

@@ -32,9 +32,10 @@ This project is built so as to learn the concepts of NextJS ServerSideRendering(
 
 A list of things not working right now:
 
-1. Anime shows not playing as expected (Ex: Demon Slayer, One Piece)
+1. ~Anime shows not playing as expected (Ex: Demon Slayer, One Piece, AOT)~
 2. ~Route doesn't always change when hitting play~
 3. Mobile Navigation
+4. ~Episodes/Movies and tv-show elements appearing too small on mobile phones~
 
 ## Running Locally
 
