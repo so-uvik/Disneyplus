@@ -12,12 +12,11 @@ const Play = ({ result }: any) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(()=>{
-    if(!session)
-    {
-      router.push("/")
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
     }
-  })
+  });
   return (
     <>
       <Head>
@@ -36,7 +35,8 @@ const Play = ({ result }: any) => {
         {
           <iframe
             id="iframe"
-            src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`}
+            // src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`}
+            src={`https://vidsrc.to/embed/movie/${result.id}`}
             width="100%"
             height="100%"
             frameBorder="0"
