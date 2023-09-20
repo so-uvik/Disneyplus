@@ -32,19 +32,17 @@ const Play = ({ result }: any) => {
         </Button>
       </Link>
       <Playing>
-        {
-          <iframe
-            id="iframe"
-            // src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`}
-            src={`https://vidsrc.to/embed/movie/${result.id}`}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allowFullScreen
-            allow="autoplay"
-            className="aspect-video"
-          ></iframe>
-        }
+        <iframe
+          id="iframe"
+          // src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`}
+          src={`https://vidsrc.to/embed/movie/${result.id}`}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allowFullScreen
+          allow="autoplay"
+          className="aspect-video"
+        ></iframe>
       </Playing>
       {/* <Buttons>
       <span>

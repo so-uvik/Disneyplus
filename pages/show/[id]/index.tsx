@@ -8,6 +8,7 @@ import Hero from "../../../components/Hero";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { ProgressData } from "./play";
 
 function Show({ result }: any) {
   const { data: session, status } = useSession();
@@ -24,11 +25,14 @@ function Show({ result }: any) {
     }
   }, []);
 
-  const logo =  result.images.logos.find((logo: any) => logo.iso_639_1 === "en");
+  const logo = result.images.logos.find((logo: any) => logo.iso_639_1 === "en");
 
   const index = result.videos.results.findIndex(
     (element: any) => element.type === "Trailer"
   );
+
+  const watching = window.localStorage.getItem(`tvshow_${router.query.id}`);
+  const parsedWatching: ProgressData = watching ? JSON.parse(watching) : null;
 
   return (
     <div className="relative">
@@ -55,12 +59,28 @@ function Show({ result }: any) {
             />
           </div>
           <div className="absolute inset-y-12 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50">
-          {logo  ? <Image src={`${LOGO_URL}${logo.file_path}`} alt={result.title} priority={true} width={550} height={200} objectFit="contain"/> :
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              {result.title || result.original_name}
-            </h1>}
+            {logo ? (
+              <Image
+                src={`${LOGO_URL}${logo.file_path}`}
+                alt={result.title}
+                priority={true}
+                width={550}
+                height={200}
+                objectFit="contain"
+              />
+            ) : (
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                {result.title || result.original_name}
+              </h1>
+            )}
             <div className="flex items-center space-x-3 md:space-x-5 ">
-              <Link href={`/show/${result.id}/play?season=1&episode=1`}>
+              <Link
+                href={
+                  parsedWatching
+                    ? `/show/${result.id}/play?season=${parsedWatching.season}&episode=${parsedWatching.episode}`
+                    : `/show/${result.id}/play?season=1&episode=1`
+                }
+              >
                 <button className="text-xs md:text-base bg-[#f9f9f9] text-black flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]">
                   <img
                     src="/images/play-icon-black.svg"

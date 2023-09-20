@@ -14,6 +14,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.26",
+    "@uidotdev/usehooks": "^2.3.0",
     "class-variance-authority": "^0.6.0",
     "firebase": "^9.21.0",
     "firebase-admin": "^11.8.0",

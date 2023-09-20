@@ -8,11 +8,18 @@ import { Wrap } from "../../../components/EpisodeDisplay";
 import { Button } from "../../../components/ui/button";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { useLocalStorage } from "@uidotdev/usehooks";
+
+export interface ProgressData {
+  season: number;
+  episode: number;
+}
 
 const Play = ({ result, seasonQuery, episodeQuery }: any) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  const [progress, setProgress] = useState<ProgressData | null>(null);
   const [season_number, setSeason_Number] = useState(seasonQuery); // stores the current season number
   const [episode_number, setEpisode_Number] = useState(episodeQuery); // stores the current episode number to display proper video that is playing
   const [seasons, setSeasons] = useState<any>([]); // stores how many seasons are there of a show to help display them in dropdown
@@ -77,6 +84,7 @@ const Play = ({ result, seasonQuery, episodeQuery }: any) => {
     // return () => {
     //   console.log('CLEANUP');
     // };
+    showProgress({ season: season_number, episode: episode_number });
   }, [season_number]); //fetches new season episodes when user changes it.
 
   useEffect(() => {
@@ -88,11 +96,26 @@ const Play = ({ result, seasonQuery, episodeQuery }: any) => {
       undefined,
       { scroll: false }
     );
+    showProgress({ season: season_number, episode: episode_number });
   }, [episode_number]); //changes the query string, when user updates the episode.
 
   const ChangeSeasonHandler = (event: any) => {
     //setSeason_Number(event.target.value.substr(6));
     setSeason_Number(event.target.value);
+  };
+
+  const showProgress = (data: ProgressData) => {
+    const progressData = window.localStorage.getItem(
+      `tvshow_${router.query.id}`
+    );
+    let existingProgress: ProgressData | null = null;
+    if (progressData) existingProgress = JSON.parse(progressData);
+    const newProgress = { ...existingProgress, ...data };
+    localStorage.setItem(
+      `tvshow_${router.query.id}`,
+      JSON.stringify(newProgress)
+    );
+    setProgress(newProgress);
   };
 
   useEffect(() => {
