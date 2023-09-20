@@ -10,8 +10,8 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
 
   return (
     <div>
-      {watchingNow.map((element) => (
-        <h2>
+      {watchingNow.map((element, index) => (
+        <h2 key={index}>
           {element.key} and watching season{element.season} episode{" "}
           {element.episode}
         </h2>
