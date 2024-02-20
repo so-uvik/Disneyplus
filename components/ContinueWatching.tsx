@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from "react";
-import { localStorage } from "../pages";
-import { Container, Content } from "./MoviesCollection";
-import ContinueWatchingThumbnail from "./ContinueWatchingThumbnail";
-import { nanoid } from "nanoid";
+import { FC, useEffect, useState } from 'react';
+import { localStorage } from '../pages';
+import { Container, Content } from './MoviesCollection';
+import ContinueWatchingThumbnail from './ContinueWatchingThumbnail';
+import { nanoid } from 'nanoid';
 
 interface ContinueWatchingProps {
   watchingNow: localStorage[];
@@ -14,15 +14,13 @@ interface ContinueWatchingThumbnailProps {
 }
 
 const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
-  const [continueWatchingThumbnails, setContinueWatchingThumbnails] = useState<
-    ContinueWatchingThumbnailProps[]
-  >([]);
+  const [continueWatchingThumbnails, setContinueWatchingThumbnails] = useState<ContinueWatchingThumbnailProps[]>([]);
   useEffect(() => {
     const localThumbnailImages: string[] = [];
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        accept: "application/json",
+        accept: 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN}`,
       },
     };
@@ -41,7 +39,7 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
           options
         );*/
         const newData = await response.json();
-        console.log("newData ContinueWatching.tsx", newData);
+        console.log('newData ContinueWatching.tsx', newData);
         // localThumbnailImages.push(newData.stills[0]?.file_path);
         localThumbnailImages.push({
           name: newData.name,
@@ -77,17 +75,18 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
     <Container>
       <h3 className="font-semibold text-2xl ">Continue Watching</h3>
       <Content>
-        {watchingNow.map((element, index = 0) =>
-          continueWatchingThumbnails[index] ? (
-            <ContinueWatchingThumbnail
-              name={continueWatchingThumbnails[index].name}
-              key={element.key}
-              id={element.key}
-              image={continueWatchingThumbnails[index].image}
-              season={element.season}
-              episode={element.episode}
-            ></ContinueWatchingThumbnail>
-          ) : null
+        {watchingNow.map(
+          (element, index = 0) =>
+            continueWatchingThumbnails[index] && (
+              <ContinueWatchingThumbnail
+                name={continueWatchingThumbnails[index].name}
+                key={element.key}
+                id={element.key}
+                image={continueWatchingThumbnails[index].image}
+                season={element.season}
+                episode={element.episode}
+              ></ContinueWatchingThumbnail>
+            )
         )}
       </Content>
     </Container>
