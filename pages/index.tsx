@@ -77,7 +77,7 @@ const Home: NextPage = ({
         <main>
           <Slider />
           <Viewers />
-          <ContinueWatching watchingNow={continueWatching} key={nanoid()} />
+          <ContinueWatching watchingNow={continueWatching} />
           <MoviesCollection
             results={popularMovies}
             title="Recommended For You"
