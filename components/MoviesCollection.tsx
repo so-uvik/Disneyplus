@@ -21,13 +21,13 @@ const MoviesCollection = (props: any) => {
 };
 export default MoviesCollection;
 
-const Container = styled.div`
+export const Container = styled.div`
   margin-top: 30px;
   margin-left: 20px;
   margin-right: 20px;
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }

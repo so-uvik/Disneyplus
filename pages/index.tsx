@@ -10,13 +10,15 @@ import ShowsCollection from "../components/ShowsCollection";
 import { Movies } from "../models";
 import FooterComponent from "../components/Footer";
 import { ProgressData } from "./show/[id]/play";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ContinueWatching from "../components/ContinueWatching";
+import { nanoid } from "nanoid";
 
 export interface localStorage {
   key: number;
   episode: number;
   season: number;
+  image?: string;
 }
 
 const Home: NextPage = ({
@@ -29,9 +31,9 @@ const Home: NextPage = ({
   disney_classics,
 }: any) => {
   const { data: session } = useSession();
-  //const continueWatching: localStorage[] = [];
+  const [continueWatching, setContinueWatching] = useState<localStorage[]>([]);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const getKeysWithPrefix = (prefix: string): string[] => {
       const keys = [];
       for (let i = 0; i < window.localStorage.length; i++) {
@@ -44,17 +46,20 @@ const Home: NextPage = ({
     };
 
     const keys = getKeysWithPrefix("tvshow_");
+    let localContinueWatching: localStorage[] = [];
     keys.map((key) => {
       const values = window.localStorage.getItem(key);
       const parsedValues: ProgressData =
         values !== null ? JSON.parse(values) : null;
-      continueWatching.push({
+      localContinueWatching.push({
         key: parseInt(key.substring(7)),
         episode: parsedValues.episode,
         season: parsedValues.season,
       });
     });
-  }, []); */
+    setContinueWatching(localContinueWatching);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -72,6 +77,7 @@ const Home: NextPage = ({
         <main>
           <Slider />
           <Viewers />
+          <ContinueWatching watchingNow={continueWatching} key={nanoid()} />
           <MoviesCollection
             results={popularMovies}
             title="Recommended For You"

@@ -8,7 +8,6 @@ import { Wrap } from "../../../components/EpisodeDisplay";
 import { Button } from "../../../components/ui/button";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { useLocalStorage } from "@uidotdev/usehooks";
 
 export interface ProgressData {
   season: number;
