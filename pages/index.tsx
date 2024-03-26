@@ -12,7 +12,6 @@ import FooterComponent from "../components/Footer";
 import { ProgressData } from "./show/[id]/play";
 import { useEffect, useState } from "react";
 import ContinueWatching from "../components/ContinueWatching";
-import { nanoid } from "nanoid";
 
 export interface localStorage {
   key: number;
