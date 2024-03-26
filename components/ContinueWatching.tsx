@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { localStorage } from "../pages";
 import { Container, Content } from "./MoviesCollection";
 import ContinueWatchingThumbnail from "./ContinueWatchingThumbnail";
-import { nanoid } from "nanoid";
 
 interface ContinueWatchingProps {
   watchingNow: localStorage[];
@@ -38,7 +37,6 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
               options
             ); // Replace with your API endpoint
             const data = await response.json();
-            console.log(data);
             const mappedData: ContinueWatchingThumbnailProps = {
               ...show,
               image: data.still_path,
