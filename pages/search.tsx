@@ -4,8 +4,12 @@ import SearchDisplay from "../components/SearchDisplay";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Movies } from "../models";
+import { useRouter } from "next/router";
 const Search = () => {
-  const [enteredSearch, setEnteredSearch] = useState("");
+  const router = useRouter();
+  const { query } = router;
+  const queryString = query.result?.toString();
+  const [enteredSearch, setEnteredSearch] = useState(queryString || "");
   const [movies, setMovies] = useState<Movies[]>([]);
 
   const SearchChangeHandler = (event: any) => {
@@ -13,6 +17,7 @@ const Search = () => {
   };
 
   useEffect(() => {
+    router.replace(`?result=${enteredSearch}`);
     const identifier = setTimeout(() => {
       if (enteredSearch.trim().length > 0)
         fetch(
@@ -42,6 +47,7 @@ const Search = () => {
       <Header />
       <SearchBox>
         <input
+          value={enteredSearch}
           type="text"
           placeholder="Search for movie or a tv-show"
           onChange={SearchChangeHandler}

@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC } from "react";
 import { Wrap } from "./MovieThumbnail";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -8,8 +8,10 @@ interface ContinueWatchingThumbnailProps {
   name: string | undefined;
   image: string | undefined;
   id: number;
+  index: number;
   season: number;
   episode: number;
+  removeItems: (id: number) => void;
 }
 
 const ContinueWatchingThumbnail: FC<ContinueWatchingThumbnailProps> = ({
@@ -18,13 +20,11 @@ const ContinueWatchingThumbnail: FC<ContinueWatchingThumbnailProps> = ({
   image,
   season,
   name,
+  index,
+  removeItems,
 }) => {
   const router = useRouter();
   const BASE_URL = "https://image.tmdb.org/t/p/w780/";
-
-  // const [, setupdateState] = useState({});
-
-  // const forceUpdate = useCallback(() => setupdateState({}), []);
   return (
     <Wrapper
       key={id}
@@ -43,12 +43,13 @@ const ContinueWatchingThumbnail: FC<ContinueWatchingThumbnailProps> = ({
         id="xsign"
         onClick={(e) => {
           localStorage.removeItem(`tvshow_${id}`);
-          // forceUpdate();
+          removeItems(index);
           return e.stopPropagation();
         }}
       />
       <img
         src={`${BASE_URL}${image}`}
+        alt={`/public/images/noImage.png`}
         //`${BASE_URL}${result.poster_path}`}
       />
     </Wrapper>

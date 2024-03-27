@@ -20,6 +20,15 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
     ContinueWatchingThumbnailProps[]
   >([]);
 
+  const removeItem = (index: number) => {
+    console.log("running removeItem");
+    setContinueWatching((prevItems) => {
+      const newItems = [...prevItems];
+      newItems.splice(index, 1);
+      return newItems;
+    });
+  };
+
   useEffect(() => {
     const options = {
       method: "GET",
@@ -67,9 +76,11 @@ const ContinueWatching: FC<ContinueWatchingProps> = ({ watchingNow }) => {
       <Content>
         {continueWatching.map((element, index = 0) => (
           <ContinueWatchingThumbnail
+            removeItems={removeItem}
             name={element.name}
-            key={element.key}
-            id={element.key}
+            key={element.key} //Id of the current show being rendered
+            index={index} //Array Index(sequentially) of the current show being rendered
+            id={element.key} //Since can't use key inside the component, ContinueWatchingThumbnail using another prop id instead for general use cases.
             image={element.image}
             season={element.season}
             episode={element.episode}
