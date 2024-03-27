@@ -51,7 +51,8 @@ function Show({ result }: any) {
                 `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
                 `${BASE_URL}${result.poster_path}`
               }
-              layout="fill"
+              alt="/public/images/noImage.png"
+              fill
               objectFit="cover"
               className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"
               priority={true}
