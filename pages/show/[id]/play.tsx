@@ -145,11 +145,11 @@ const Play = ({ result, seasonQuery, episodeQuery }: any) => {
         {
           <iframe
             id="iframe"
-            //src={`https://www.2embed.to/embed/tmdb/tv?id=${result.id}&s=${season_number}&e=${episode_number}`}
-            src={`https://vidsrc.to/embed/tv/${result.id}/${season_number}/${episode_number}`}
+            // src={`https://vidsrc.to/embed/tv/${result.id}/${season_number}/${episode_number}`}
+            // src={`https://embed.su/embed/tv/${result.id}/${season_number}/${episode_number}`}
+            src={`https://iframe.pstream.org/embed/tmdb-tv-${result.id}/${season_number}/${episode_number}`}
             width="100%"
             height="100%"
-            frameBorder="0"
             allowFullScreen
             allow="autoplay"
             className="relative mx-auto my-0"
@@ -204,7 +204,7 @@ const Play = ({ result, seasonQuery, episodeQuery }: any) => {
             >
               <img
                 src={`${BASE_URL}${data.still_path}`}
-                // || `${BASE_URL}${episode.poster_path}`
+              // || `${BASE_URL}${episode.poster_path}`
               />
               <h4>{`${data.episode_number}. ${data.name}`}</h4>
             </Wrap>

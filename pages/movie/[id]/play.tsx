@@ -34,11 +34,12 @@ const Play = ({ result }: any) => {
       <Playing>
         <iframe
           id="iframe"
-          // src={`https://www.2embed.to/embed/tmdb/movie?id=${result.id}&autoplay=1`}
-          src={`https://vidsrc.to/embed/movie/${result.id}`}
+          // src={`https://vidsrc.to/embed/movie/${result.id}`}
+          // src={`https://embed.su/embed/movie/${result.id}`}
+          src={`https://iframe.pstream.org/media/tmdb-movie-${result.id}`}
           width="100%"
           height="100%"
-          frameBorder="0"
+          // frameBorder="0"
           allowFullScreen
           allow="autoplay"
           className="aspect-video"
